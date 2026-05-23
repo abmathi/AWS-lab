@@ -10,7 +10,7 @@ Before deploying any cloud resources, I configured an AWS monthly budget alert t
 
 ### Screenshot
 
-![AWS Budget Alert](screenshots/Step-1/01-aws-budget-alert-created.png)
+![AWS Budget Alert](../screenshots/Step-1/01-aws-budget-alert-created.png)
 
 
 ## Step 2: Deploying an Intentionally Vulnerable EC2 Instance
@@ -34,11 +34,11 @@ This simulates a common real-world cloud security issue where remote administrat
 
 ### Screenshots
 
-![EC2 Launch Config](screenshots/Step-2/02-ec2-launch-config.png)
+![EC2 Launch Config](../screenshots/Step-2/02-ec2-launch-config.png)
 
-![Insecure Security Group](screenshots/Step-2/03-insecure-security-group.png)
+![Insecure Security Group](../screenshots/Step-2/03-insecure-security-group.png)
 
-![EC2 Running](screenshots/Step-2/04-ec2-instance-running.png)
+![EC2 Running](../screenshots/Step-2/04-ec2-instance-running.png)
 
 
 ## Step 3: Validating Public SSH Exposure
@@ -46,10 +46,14 @@ This simulates a common real-world cloud security issue where remote administrat
 Connected to the EC2 instance remotely using SSH and the generated private key pair.
 
 ### Commands used:
+```bash
 ssh -i CloudSecurityLab-Key.pem ec2-user@PUBLIC_IP
+```
 
+```bash
 whoami
 hostname
+```
 
 ### Results:
 
@@ -62,9 +66,9 @@ This demonstrates how publicly exposed administrative services can allow remote 
 
 ### Screenshots
 
-![Successful SSH Login](screenshots/Step-3/05-successful-ssh-login.png)
+![Successful SSH Login](../screenshots/Step-3/05-successful-ssh-login.png)
 
-![Remote Access Validation](screenshots/Step-3/06-ec2-remote-access-validation.png)
+![Remote Access Validation](../screenshots/Step-3/06-ec2-remote-access-validation.png)
 
 
 ## Step 4: Investigating Public SSH Exposure
@@ -80,12 +84,15 @@ Reviewed the EC2 security group configuration and validated that the SSH service
 ### Validation:
 Used PowerShell to confirm remote accessibility:
 
+```powershell
 Test-NetConnection PUBLIC_IP -Port 22
+```
 
 Result:
 
+```powershell
 TcpTestSucceeded : True
-
+```
 
 #### Additional Validation:
 Verified that the SSH daemon was actively listening on port 22 inside the EC2 instance.
@@ -99,11 +106,11 @@ unauthorized remote access attempts
 
 ### Screenshots
 
-![Public SSH Rule](screenshots/Step-4/07-security-group-public-ssh.png)
+![Public SSH Rule](../screenshots/Step-4/07-security-group-public-ssh.png)
 
-![Port Validation](screenshots/Step-4/08-public-port-validation.png)
+![Port Validation](../screenshots/Step-4/08-public-port-validation.png)
 
-![Listening Services](screenshots/Step-4/09-listening-services.png)
+![Listening Services](../screenshots/Step-4/09-listening-services.png)
 
 
 ## Step 5: Remediating the Public SSH Exposure
@@ -132,9 +139,9 @@ This reduced the internet-exposed attack surface and implemented least-privilege
 
 ### Screenshots
 
-![Restricted SSH Rule](screenshots/Step-5/10-restricted-ssh-rule.png)
+![Restricted SSH Rule](../screenshots/Step-5/10-restricted-ssh-rule.png)
 
-![Post-Hardening SSH Validation](screenshots/Step-5/11-post-hardening-ssh-validation.png)
+![Post-Hardening SSH Validation](../screenshots/Step-5/11-post-hardening-ssh-validation.png)
 
 
 ## Step 6: Enabling AWS CloudTrail Logging
@@ -170,9 +177,9 @@ CloudTrail provides centralized audit logging that supports:
 
 ### Screenshots
 
-![CloudTrail Enabled](screenshots/Step-6/12-cloudtrail-enabled.png)
+![CloudTrail Enabled](../screenshots/Step-6/12-cloudtrail-enabled.png)
 
-![CloudTrail Event History](screenshots/Step-6/13-cloudtrail-event-history.png)
+![CloudTrail Event History](../screenshots/Step-6/13-cloudtrail-event-history.png)
 
 
 ## Step 7: Deploying a Public Web Server
@@ -223,11 +230,11 @@ This simulated a realistic internet-facing cloud workload while maintaining rest
 
 ### Screenshots
 
-![Apache Running](screenshots/Step-7/14-apache-running.png)
+![Apache Running](../screenshots/Step-7/14-apache-running.png)
 
-![Web Server Security Group](screenshots/Step-7/15-web-server-security-group.png)
+![Web Server Security Group](../screenshots/Step-7/15-web-server-security-group.png)
 
-![Public Web Server](screenshots/Step-7/16-public-web-server.png)
+![Public Web Server](../screenshots/Step-7/16-public-web-server.png)
 
 
 
@@ -278,9 +285,9 @@ This demonstrated how defenders can:
 
 ### Screenshots
 
-![Live Apache Logs](screenshots/Step-8/17-live-apache-logs.png)
+![Live Apache Logs](../screenshots/Step-8/17-live-apache-logs.png)
 
-![404 Log Analysis](screenshots/Step-8/18-404-log-analysis.png)
+![404 Log Analysis](../screenshots/Step-8/18-404-log-analysis.png)
 
 
 ## Step 9: Investigating Failed SSH Authentication Attempts
@@ -331,11 +338,11 @@ This demonstrated:
 
 ### Screenshots
 
-![Failed SSH Attempt](screenshots/Step-9/20-failed-ssh-attempt.png)
+![Failed SSH Attempt](../screenshots/Step-9/20-failed-ssh-attempt.png)
 
-![SSH Authentication Logs](screenshots/Step-9/21-ssh-authentication-logs.png)
+![SSH Authentication Logs](../screenshots/Step-9/21-ssh-authentication-logs.png)
 
-![Filtered Failed Logins](screenshots/Step-9/22-filtered-failed-logins.png)
+![Filtered Failed Logins](../screenshots/Step-9/22-filtered-failed-logins.png)
 
 
 ## Step 10: Implementing Automated SSH Attack Protection with Fail2Ban
@@ -391,11 +398,11 @@ This implemented automated intrusion prevention capabilities against:
 
 ### Screenshots
 
-![Fail2Ban Running](screenshots/Step-10/23-fail2ban-running.png)
+![Fail2Ban Running](../screenshots/Step-10/23-fail2ban-running.png)
 
-![Fail2Ban SSH Policy](screenshots/Step-10/24-fail2ban-ssh-policy.png)
+![Fail2Ban SSH Policy](../screenshots/Step-10/24-fail2ban-ssh-policy.png)
 
-![Fail2Ban SSHD Status](screenshots/Step-10/25-fail2ban-sshd-status.png)
+![Fail2Ban SSHD Status](../screenshots/Step-10/25-fail2ban-sshd-status.png)
 
 
 ## Step 11: Simulating and Blocking SSH Brute-Force Activity
@@ -448,11 +455,11 @@ This demonstrated:
 
 ### Screenshots
 
-![Simulated Brute Force Attempts](screenshots/Step-11/26-simulated-bruteforce-attempts.png)
+![Simulated Brute Force Attempts](../screenshots/Step-11/26-simulated-bruteforce-attempts.png)
 
-![Fail2Ban Active Ban](screenshots/Step-11/27-fail2ban-active-ban.png)
+![Fail2Ban Active Ban](../screenshots/Step-11/27-fail2ban-active-ban.png)
 
-![SSH Blocked After Ban](screenshots/Step-11/28-ssh-blocked-after-ban.png)
+![SSH Blocked After Ban](../screenshots/Step-11/28-ssh-blocked-after-ban.png)
 
 
 ## Step 12: Implementing IAM Administrative Access
@@ -495,11 +502,11 @@ This demonstrated:
 
 ### Screenshots
 
-![IAM User Created](screenshots/Step-12/30-iam-user-created.png)
+![IAM User Created](../screenshots/Step-12/30-iam-user-created.png)
 
-![IAM Admin Policy](screenshots/Step-12/31-iam-admin-policy.png)
+![IAM Admin Policy](../screenshots/Step-12/31-iam-admin-policy.png)
 
-![IAM User Login](screenshots/Step-12/32-iam-user-login.png)
+![IAM User Login](../screenshots/Step-12/32-iam-user-login.png)
 
 
 ## Step 13: Enabling Multi-Factor Authentication (MFA)
@@ -536,11 +543,11 @@ This implemented additional identity protection against:
 
 ### Screenshots
 
-![IAM MFA Enabled](screenshots/Step-13/33-iam-mfa-enabled.png)
+![IAM MFA Enabled](../screenshots/Step-13/33-iam-mfa-enabled.png)
 
-![AWS MFA Prompt](screenshots/Step-13/34-aws-mfa-prompt.png)
+![AWS MFA Prompt](../screenshots/Step-13/34-aws-mfa-prompt.png)
 
-![Successful MFA Login](screenshots/Step-13/35-successful-mfa-login.png)
+![Successful MFA Login](../screenshots/Step-13/35-successful-mfa-login.png)
 
 
 ## Step 14: Creating Cloud Security Architecture Documentation
@@ -577,9 +584,9 @@ The architecture diagram provides:
 
 ### Screenshots
 
-![Architecture Diagram Editor](screenshots/Step-14/36-architecture-diagram-editor.png)
+![Architecture Diagram Editor](../screenshots/Step-14/36-architecture-diagram-editor.png)
 
-![Final Architecture Diagram](screenshots/Step-14/37-final-architecture-diagram.png)
+![Final Architecture Diagram](../screenshots/Step-14/37-final-architecture-diagram.png)
 
 
 ## AWS Service Availability Observation
@@ -656,13 +663,13 @@ This demonstrated:
 
 ### Screenshots
 
-![CloudWatch CPU Metrics](screenshots/Step-17/43-cloudwatch-cpu-metrics.png)
+![CloudWatch CPU Metrics](../screenshots/Step-17/43-cloudwatch-cpu-metrics.png)
 
-![CloudWatch Alarm Configuration](screenshots/Step-17/44-cloudwatch-alarm-config.png)
+![CloudWatch Alarm Configuration](../screenshots/Step-17/44-cloudwatch-alarm-config.png)
 
-![CloudWatch Alarm Triggered](screenshots/Step-17/45-cloudwatch-alarm-triggered.png)
+![CloudWatch Alarm Triggered](../screenshots/Step-17/45-cloudwatch-alarm-triggered.png)
 
-![SNS Alert Email](screenshots/Step-17/46-sns-alert-email.png)
+![SNS Alert Email](../screenshots/Step-17/46-sns-alert-email.png)
 
 
 ## Step 18: Finalizing the Cloud Security Project Repository
