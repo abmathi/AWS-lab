@@ -9,7 +9,7 @@ Designed and secured a vulnerable AWS EC2 environment to simulate real-world clo
 
 ## Architecture Diagram
 
-![Cloud Security Architecture](aws-cloud-security-lab.png)
+![Cloud Security Architecture](docs/architecture/aws-cloud-security-lab.png)
 
 
 # Security Incident Simulation
